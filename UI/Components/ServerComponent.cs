@@ -49,7 +49,10 @@ namespace LiveSplit.UI.Components
             SplitTimeFormatter = new RegularTimeFormatter(TimeAccuracy.Hundredths);
 
             ContextMenuControls = new Dictionary<string, Action>();
-            ContextMenuControls.Add("Start Server", Start);
+            //ContextMenuControls.Add("Start Server", Start);
+            ContextMenuControls.Add("Stop Server", Stop);
+
+            this.Start();
 
             State = state;
             Form = state.Form;
