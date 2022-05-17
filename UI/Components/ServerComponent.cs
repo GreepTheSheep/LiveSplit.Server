@@ -293,6 +293,16 @@ namespace LiveSplit.UI.Components
                         }
                         break;
                     }
+                    case "getgamename":
+                    {
+                        response = State.Run.GameName.Length > 0 ? State.Run.GameName : "-";
+                        break;
+                    }
+                    case "getcategoryname":
+                    {
+                        response = State.Run.CategoryName.Length > 0 ? State.Run.CategoryName : "-";
+                        break;
+                    }
                     case "getlastsplitname":
                     case "getprevioussplitname":
                     {

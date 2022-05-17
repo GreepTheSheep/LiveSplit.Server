@@ -88,6 +88,9 @@ Other commands:
 - getprevioussplitname
 - getcurrenttimerphase
 
+- getgamename
+- getcategoryname
+
 Commands are defined at `ProcessMessage` in "ServerComponent.cs".
 
 When using Game Time, it's important that you call "initgametime" once. Once "initgametime" is used, an additional comparison will appear and you can switch to it via the context menu (Compare Against > Game Time). This special comparison will show everything based on the Game Time (every component now shows Game Time based information).
