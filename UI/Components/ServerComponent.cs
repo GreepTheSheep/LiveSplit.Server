@@ -18,7 +18,7 @@ namespace LiveSplit.UI.Components
     {
         public Settings Settings { get; set; }
         public TcpListener Server { get; set; }
-
+        public ServerFactory ServerFactory { get; set; }
         public List<Connection> Connections { get; set; }
 
         protected LiveSplitState State { get; set; }
@@ -44,6 +44,7 @@ namespace LiveSplit.UI.Components
             Settings = new Settings();
             Model = new TimerModel();
             Connections = new List<Connection>();
+            ServerFactory = new ServerFactory();
 
             DeltaFormatter = new PreciseDeltaFormatter(TimeAccuracy.Hundredths);
             SplitTimeFormatter = new RegularTimeFormatter(TimeAccuracy.Hundredths);
@@ -301,6 +302,11 @@ namespace LiveSplit.UI.Components
                     case "getcategoryname":
                     {
                         response = State.Run.CategoryName.Length > 0 ? State.Run.CategoryName : "-";
+                        break;
+                    }
+                    case "getserverversion":
+                    {
+                        response = ServerFactory.Version.ToString();
                         break;
                     }
                     case "getlastsplitname":
