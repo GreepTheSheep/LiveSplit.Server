@@ -30,7 +30,7 @@ namespace LiveSplit.UI.Components
         public Settings()
         {
             InitializeComponent();
-            Port = 16834;
+            Port = 16934;
             LocalIP = GetIP();
             label3.Text = LocalIP;
 

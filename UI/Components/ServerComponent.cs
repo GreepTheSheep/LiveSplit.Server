@@ -35,7 +35,7 @@ namespace LiveSplit.UI.Components
         public float PaddingLeft => 0;
         public float PaddingRight => 0;
 
-        public string ComponentName => $"LiveSplit Server ({ Settings.Port })";
+        public string ComponentName => $"LiveSplit Server for Speedrun plugin on Trackmania ({ Settings.Port })";
 
         public IDictionary<string, Action> ContextMenuControls { get; protected set; }
 
@@ -49,8 +49,8 @@ namespace LiveSplit.UI.Components
             SplitTimeFormatter = new RegularTimeFormatter(TimeAccuracy.Hundredths);
 
             ContextMenuControls = new Dictionary<string, Action>();
-            //ContextMenuControls.Add("Start Server", Start);
-            ContextMenuControls.Add("Stop Server", Stop);
+            //ContextMenuControls.Add("Start Server (Trackmania)", Start);
+            ContextMenuControls.Add("Stop Server (Trackmania)", Stop);
 
             this.Start();
 
@@ -71,14 +71,14 @@ namespace LiveSplit.UI.Components
             WaitingServerPipe.BeginWaitForConnection(AcceptPipeClient, null);
 
             ContextMenuControls.Clear();
-            ContextMenuControls.Add("Stop Server", Stop);
+            ContextMenuControls.Add("Stop Server (Trackmania)", Stop);
         }
 
         public void Stop()
         {
             CloseAllConnections();
             ContextMenuControls.Clear();
-            ContextMenuControls.Add("Start Server", Start);
+            ContextMenuControls.Add("Start Server (Trackmania)", Start);
         }
 
         protected void CloseAllConnections()
