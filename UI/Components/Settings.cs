@@ -58,5 +58,10 @@ namespace LiveSplit.UI.Components
         {
             PortString = SettingsHelper.ParseString(settings["Port"]);
         }
+
+        private void buttonOpenplanet_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://openplanet.dev/plugin/speedrun");
+        }
     }
 }
