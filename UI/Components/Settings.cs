@@ -12,6 +12,9 @@ namespace LiveSplit.UI.Components
 
         public string LocalIP { get; set; }
 
+        public ServerComponent ServerComponent { get; set; }
+
+
         public string GetIP()
         {
             IPAddress[] ipv4Addresses = Array.FindAll(
@@ -27,14 +30,33 @@ namespace LiveSplit.UI.Components
             set { Port = ushort.Parse(value); }
         }
 
-        public Settings()
+        public Settings(ServerComponent component)
         {
             InitializeComponent();
+            ServerComponent = component;
             Port = 16934;
             LocalIP = GetIP();
             label3.Text = LocalIP;
+            label6.Text = ServerComponent.ServerFactory.Version.ToString();
+
+            if (ServerComponent.Server != null) SetServerOn();
+            else SetServerOff();
 
             txtPort.DataBindings.Add("Text", this, "PortString", false, DataSourceUpdateMode.OnPropertyChanged);
+        }
+
+        public void SetServerOn()
+        {
+            labelStatus.Text = "Server is enabled";
+            labelStatus.ForeColor = System.Drawing.Color.Green;
+            buttonStatus.Text = "Stop Server";
+        }
+
+        public void SetServerOff()
+        {
+            labelStatus.Text = "Server is disabled";
+            labelStatus.ForeColor = System.Drawing.Color.Red;
+            buttonStatus.Text = "Start Server";
         }
 
         public XmlNode GetSettings(XmlDocument document)
@@ -62,6 +84,19 @@ namespace LiveSplit.UI.Components
         private void buttonOpenplanet_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://openplanet.dev/plugin/speedrun");
+        }
+
+        private void buttonStatus_Click(object sender, EventArgs e)
+        {
+            if (ServerComponent.Server != null)
+            {
+                // if server on
+                ServerComponent.Stop();
+            }
+            else
+            {
+                ServerComponent.Start();
+            }
         }
     }
 }

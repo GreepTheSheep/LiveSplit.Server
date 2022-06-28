@@ -41,13 +41,14 @@ namespace LiveSplit.UI.Components
 
         public ServerComponent(LiveSplitState state)
         {
-            Settings = new Settings();
             Model = new TimerModel();
             Connections = new List<Connection>();
             ServerFactory = new ServerFactory();
 
             DeltaFormatter = new PreciseDeltaFormatter(TimeAccuracy.Hundredths);
             SplitTimeFormatter = new RegularTimeFormatter(TimeAccuracy.Hundredths);
+
+            Settings = new Settings(this);
 
             ContextMenuControls = new Dictionary<string, Action>();
             //ContextMenuControls.Add("Start Server (Trackmania)", Start);
@@ -70,6 +71,7 @@ namespace LiveSplit.UI.Components
             Server.BeginAcceptTcpClient(AcceptTcpClient, null);
             WaitingServerPipe = CreateServerPipe();
             WaitingServerPipe.BeginWaitForConnection(AcceptPipeClient, null);
+            Settings.SetServerOn();
 
             ContextMenuControls.Clear();
             ContextMenuControls.Add("Stop Server (Trackmania)", Stop);
@@ -78,6 +80,7 @@ namespace LiveSplit.UI.Components
         public void Stop()
         {
             CloseAllConnections();
+            Settings.SetServerOff();
             ContextMenuControls.Clear();
             ContextMenuControls.Add("Start Server (Trackmania)", Start);
         }
@@ -92,7 +95,10 @@ namespace LiveSplit.UI.Components
             }
             Connections.Clear();
             if (Server != null)
+            {
                 Server.Stop();
+                Server = null;
+            }
         }
 
         public void AcceptTcpClient(IAsyncResult result)
