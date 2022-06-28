@@ -309,6 +309,11 @@ namespace LiveSplit.UI.Components
                         response = ServerFactory.Version.ToString();
                         break;
                     }
+                    case "getappversion":
+                    {
+                        response = LiveSplit.Updates.Git.Version;
+                        break;
+                    }
                     case "getlastsplitname":
                     case "getprevioussplitname":
                     {
