@@ -20,7 +20,7 @@ namespace LiveSplit.UI.Components
 
         public string UpdateURL => "https://github.com/TrackmaniaSpeedruns/LiveSplit.TMServer/releases/latest";
 
-        public Version Version => Version.Parse("1.9.1");
+        public Version Version => Version.Parse("1.9.2");
 
         public string XMLURL => "http://livesplit.org/update/Components/update.LiveSplit.TMServer.xml";
     }
