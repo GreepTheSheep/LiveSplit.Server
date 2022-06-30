@@ -146,6 +146,7 @@
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(340, 20);
             this.txtPort.TabIndex = 1;
+            this.txtPort.KeyPress += this.txtPort_KeyPress;
             // 
             // label2
             // 

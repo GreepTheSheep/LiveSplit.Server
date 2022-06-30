@@ -27,7 +27,17 @@ namespace LiveSplit.UI.Components
         public string PortString
         {
             get { return Port.ToString(); }
-            set { Port = ushort.Parse(value); }
+            set
+            {
+                try
+                {
+                    Port = ushort.Parse(value);
+                }
+                catch (Exception)
+                {
+                    Port = 16934;
+                }
+            }
         }
 
         public Settings(ServerComponent component)
@@ -96,6 +106,15 @@ namespace LiveSplit.UI.Components
             else
             {
                 ServerComponent.Start();
+            }
+        }
+
+        private void txtPort_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verify that the pressed key isn't CTRL or any non-numeric digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
             }
         }
     }
